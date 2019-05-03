@@ -5,6 +5,6 @@ namespace pathways_api.Data.Entities
     [Table("rolelevels")]
     public class RoleLevel : NamedEntity
     {
-        
+        //example: associate, senior, principle
     }
 }

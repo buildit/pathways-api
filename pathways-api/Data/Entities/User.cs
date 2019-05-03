@@ -7,10 +7,14 @@ namespace pathways_api.Data.Entities
     [Table("users")]
     public class User : IdEntity
     {
-        public int Login_id { get; set; }
+        public int UserLoginId { get; set; }
+
+        public UserLogin UserLogin { get; set; }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public ICollection<UserSkill> UserSkills { get; set; }
     }
 }
