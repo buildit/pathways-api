@@ -1,6 +1,6 @@
 namespace pathways_api.Data.Entities
 {
-    public class RoleLevelRules
+    public class RoleLevelRule
     {
         //rules to qualify role level
         //example: Senior, Engineer, Coding, 5
