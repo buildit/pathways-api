@@ -2,7 +2,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace pathways_api.Data.Entities
 {
-    [Table("rolelevels")]
+    using pathways_common.Entities;
+
+    [Table("rolelevels", Schema = "skills")]
     public class RoleLevel : NamedEntity
     {
         //example: associate, senior, principle

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
+    <PackageReference Include="AutoMapper.Collection" Version="5.0.0" />
+    <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="0.2.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
@@ -14,10 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers" />
     <Folder Include="Data\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Model.cs" />
     <Compile Remove="Data\User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pathways-common\pathways-common.csproj" />
   </ItemGroup>
 </Project>
