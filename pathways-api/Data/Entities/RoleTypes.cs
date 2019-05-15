@@ -4,9 +4,12 @@ namespace pathways_api.Data.Entities
 {
     using pathways_common.Entities;
 
-    [Table("rolestypes", Schema = "skills")]
-    public class RoleType : NamedEntity
+    /// <summary>
+    /// software engineer, delivery lead, creative tech, etc
+    /// </summary>
+    [Table("roletype", Schema = "skills")]
+    public class RoleType : IdEntity
     {
-       //example: software engineer, delivery lead, creative tech, etc
+        public string Title { get; set; }
     }
 }

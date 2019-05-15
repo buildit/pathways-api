@@ -33,13 +33,14 @@ namespace pathways_api.Controllers
 
             User user = this.userService.RetrieveOrCreate(authenticatedEmail, authenticatedName);
 
-            string tokenString = this.Request.Headers["Bearer"];
+            string tokenString = this.Request.Headers["Authorization"];
 
             return this.Ok(new
             {
                 user.Id,
-                user.DirectoryName,
                 user.Username,
+                user.DirectoryName,
+                user.DomoIdentifier,
                 Token = tokenString
             });
         }

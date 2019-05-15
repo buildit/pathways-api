@@ -1,13 +1,15 @@
 namespace pathways_api.Data.Entities
 {
     using System.ComponentModel.DataAnnotations.Schema;
+    using pathways_common.Entities;
 
-    [Table("rolelevelrules", Schema = "admin")]
-    public class RoleLevelRule
+    /// <summary>
+    /// rules to qualify role level
+    /// example: Senior, Engineer, Coding, 5
+    /// </summary>
+    [Table("rolelevelrule", Schema = "admin")]
+    public class RoleLevelRule : IdEntity
     {
-        //rules to qualify role level
-        //example: Senior, Engineer, Coding, 5
-
         public int RoleTypeId { get; set; }
 
         public RoleType RoleType { get; set; }

@@ -4,9 +4,11 @@ namespace pathways_api.Data.Entities
 {
     using pathways_common.Entities;
 
-    [Table("rolelevels", Schema = "skills")]
+    /// <summary>
+    /// associate, senior, principle
+    /// </summary>
+    [Table("rolelevel", Schema = "skills")]
     public class RoleLevel : NamedEntity
     {
-        //example: associate, senior, principle
     }
 }

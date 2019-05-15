@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+
 namespace pathways_api.Data.Entities
 {
     using pathways_common.Entities;
 
-    [Table("skilltypes", Schema = "skills")]
-    public class SkillType : NamedEntity
+    /// <summary>
+    /// Abstracting, etc... 
+    /// </summary>
+    [Table("skilltype", Schema = "skills")]
+    public class SkillType : DescriptionEntity
     {
-        //example: Coding, Leadership, Mentoring, etc
     }
 }
