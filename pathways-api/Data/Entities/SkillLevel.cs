@@ -4,7 +4,7 @@ namespace pathways_api.Data.Entities
 {
     using pathways_common.Entities;
 
-    [Table("skilllevel", Schema = "skills")]
+    [Table("skilllevels", Schema = "skills")]
     public class SkillLevel : NamedEntity
     {
     }

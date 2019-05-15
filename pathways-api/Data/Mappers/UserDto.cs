@@ -2,18 +2,12 @@ using System.Collections.Generic;
 
 namespace pathways_api.Data.Mappers
 {
-  public class UserDto
-  {
-    public int Id { get; set; }
-    
-    public int UserLoginId { get; set; }
+    using pathways_common.Entities;
 
-    public UserLoginDto UserLogin { get; set; }
-
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
-
-    public ICollection<RoleLevelRuleDto> UserSkills { get; set; }
-  }
+    public class UserDto : ADUserEntity
+    {
+        public string DomoIdentifier { get; set; }
+        
+        public ICollection<RoleLevelRuleDto> UserSkills { get; set; }
+    }
 }

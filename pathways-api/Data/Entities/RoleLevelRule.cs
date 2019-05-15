@@ -18,7 +18,7 @@ namespace pathways_api.Data.Entities
 
         public int SkillTypeId { get; set; }
 
-        public RoleLevel SkillType { get; set; }
+        public SkillType SkillType { get; set; }
 
         public int SkillLevelId { get; set; }
 
