@@ -11,7 +11,8 @@
 
     public class Startup : PathwaysStartup
     {
-        public Startup(IConfiguration configuration) : base(configuration)
+        public Startup(IConfiguration configuration) 
+            : base(configuration)
         {
         }
 
