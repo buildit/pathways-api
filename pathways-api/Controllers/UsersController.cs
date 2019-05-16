@@ -53,5 +53,11 @@ namespace pathways_api.Controllers
             IList<UserDto> userDtos = this.mapper.Map<IList<UserDto>>(users);
             return this.Ok(userDtos);
         }
+
+        [HttpPost("update")]
+        public IActionResult UpdateUsers([FromBody] IList<UserDto> users)
+        {
+            return this.Ok(users.Count);
+        }
     }
 }
