@@ -39,7 +39,6 @@ namespace pathways_api.Controllers
             {
                 user.Id,
                 user.Username,
-                user.DirectoryName,
                 user.DomoIdentifier,
                 Token = tokenString
             });
@@ -57,6 +56,8 @@ namespace pathways_api.Controllers
         [HttpPost("update")]
         public IActionResult UpdateUsers([FromBody] IList<UserDto> users)
         {
+            IList<User> userList = this.mapper.Map<IList<User>>(users);
+            this.userService.UpdateRange(userList);
             return this.Ok(users.Count);
         }
     }

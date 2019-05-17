@@ -12,7 +12,7 @@ namespace pathways_api.Services
 
     public class UserService : PathwaysDataQueryService<User>, IUserService
     {
-        public UserService(DataContext context, IEnumerable<User> collection) : base(context, collection)
+        public UserService(DataContext context) : base(context, context.Users)
         {
         }
 
@@ -65,12 +65,32 @@ namespace pathways_api.Services
 
         public User RetrieveOrCreate(string adEmail, string adName)
         {
-            User user = this.collection.FirstOrDefault(u => u.Username == adEmail && u.DirectoryName == adName);
+            User user = this.context.Users.FirstOrDefault(u => u.Username == adEmail && u.DirectoryName == adName);
 
             if (user != null || string.IsNullOrEmpty(adEmail)) return user;
 
             user = new User(adEmail, adName);
             return this.Create(user);
+        }
+
+        public void UpdateRange(IList<User> userList)
+        {
+            foreach (User user in userList)
+            {
+                User dbUser = this.collection.FirstOrDefault(u => u.Username == user.Username);
+                if (dbUser == null)
+                {
+                    dbUser = user;
+                    this.context.Add(dbUser);
+                }
+                else
+                {
+                    dbUser.DomoIdentifier = user.DomoIdentifier;
+                    this.context.Update(dbUser);
+                }
+            }
+
+            this.context.SaveChanges();
         }
     }
 }
