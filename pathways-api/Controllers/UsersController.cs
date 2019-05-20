@@ -44,6 +44,15 @@ namespace pathways_api.Controllers
             });
         }
         
+        [HttpGet("{username}")]
+        public IActionResult GetByName(string username)
+        {
+            User users = this.userService.Retrieve(username);
+            UserDto userDto = this.mapper.Map<UserDto>(users);
+            return this.Ok(userDto);
+        }
+
+        
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()

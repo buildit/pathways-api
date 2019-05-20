@@ -8,7 +8,7 @@ namespace pathways_api.Data.Entities
     /// software engineer, delivery lead, creative tech, etc
     /// </summary>
     [Table("roletype", Schema = "skills")]
-    public class RoleType : IdEntity
+    public class RoleType : NamedEntity
     {
         public string Title { get; set; }
     }

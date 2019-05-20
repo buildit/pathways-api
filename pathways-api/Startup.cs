@@ -22,9 +22,11 @@
         public void ConfigureServices(IServiceCollection services)
         {
             base.ConfigurePathwaysServices(services);
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleTypeService, RoleTypeService>();
+            services.AddScoped<IRoleLevelService, RoleLevelService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

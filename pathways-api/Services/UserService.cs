@@ -93,4 +93,68 @@ namespace pathways_api.Services
             this.context.SaveChanges();
         }
     }
+
+    public class RoleLevelService : PathwaysDataQueryService<RoleLevel>, IRoleLevelService
+    {
+        public RoleLevelService(DataContext context) : base(context, context.RoleLevels)
+        {
+        }
+
+        public RoleLevel Create(RoleLevel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(RoleLevel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RoleLevel GetByIdWithIncludes(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateRange(IList<RoleLevel> list)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    
+    public class RoleTypeService : PathwaysDataQueryService<RoleType>, IRoleTypeService
+    {
+        public RoleTypeService(DataContext context) : base(context, context.RoleTypes)
+        {
+        }
+
+        public RoleType Create(RoleType entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(RoleType entity)
+        {
+            this.context.RoleTypes.Update(entity);
+        }
+
+        public void Delete(int id)
+        {
+            this.context.RoleTypes.Remove(this.collection.First(e => e.Id == id));
+        }
+
+        public RoleType GetByIdWithIncludes(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateRange(IList<RoleType> userList)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

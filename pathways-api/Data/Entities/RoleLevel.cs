@@ -8,7 +8,8 @@ namespace pathways_api.Data.Entities
     /// associate, senior, principle
     /// </summary>
     [Table("rolelevel", Schema = "skills")]
-    public class RoleLevel : NamedEntity
+    public class RoleLevel : DescriptionEntity
     {
+        public int Level { get; set; }
     }
 }

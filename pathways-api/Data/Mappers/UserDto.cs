@@ -10,4 +10,14 @@ namespace pathways_api.Data.Mappers
         
         public ICollection<RoleLevelRuleDto> UserSkills { get; set; }
     }
+
+    public class RoleLevelDto : DescriptionEntity
+    {
+        
+    }
+
+    public class RoleTypeDto : NamedEntity
+    {
+        public string Title { get; set; }
+    }
 }

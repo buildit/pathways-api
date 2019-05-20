@@ -8,4 +8,14 @@ namespace pathways_api.Services.Interfaces
     {
         void UpdateRange(IList<User> userList);
     }
+
+    public interface IRoleLevelService : ICrudService<RoleLevel>
+    {
+        void UpdateRange(IList<RoleLevel> list);
+    }
+    
+    public interface IRoleTypeService : ICrudService<RoleType>
+    {
+        void UpdateRange(IList<RoleType> list);
+    }
 }
