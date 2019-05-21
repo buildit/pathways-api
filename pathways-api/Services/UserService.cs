@@ -73,88 +73,14 @@ namespace pathways_api.Services
             return this.Create(user);
         }
 
-        public void UpdateRange(IList<User> userList)
+        protected override Func<User, object> UpdateKey
         {
-            foreach (User user in userList)
-            {
-                User dbUser = this.collection.FirstOrDefault(u => u.Username == user.Username);
-                if (dbUser == null)
-                {
-                    dbUser = user;
-                    this.context.Add(dbUser);
-                }
-                else
-                {
-                    dbUser.DomoIdentifier = user.DomoIdentifier;
-                    this.context.Update(dbUser);
-                }
-            }
-
-            this.context.SaveChanges();
-        }
-    }
-
-    public class RoleLevelService : PathwaysDataQueryService<RoleLevel>, IRoleLevelService
-    {
-        public RoleLevelService(DataContext context) : base(context, context.RoleLevels)
-        {
+            get { return u => u.Username; }
         }
 
-        public RoleLevel Create(RoleLevel entity)
+        protected override void MapUpdateFields(User targetObject, User sourceObject)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(RoleLevel entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public RoleLevel GetByIdWithIncludes(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateRange(IList<RoleLevel> list)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    
-    public class RoleTypeService : PathwaysDataQueryService<RoleType>, IRoleTypeService
-    {
-        public RoleTypeService(DataContext context) : base(context, context.RoleTypes)
-        {
-        }
-
-        public RoleType Create(RoleType entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(RoleType entity)
-        {
-            this.context.RoleTypes.Update(entity);
-        }
-
-        public void Delete(int id)
-        {
-            this.context.RoleTypes.Remove(this.collection.First(e => e.Id == id));
-        }
-
-        public RoleType GetByIdWithIncludes(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateRange(IList<RoleType> userList)
-        {
-            throw new NotImplementedException();
+            targetObject.DomoIdentifier = sourceObject.DomoIdentifier;
         }
     }
 }

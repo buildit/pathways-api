@@ -8,16 +8,6 @@ namespace pathways_api.Data.Mappers
     {
         public string DomoIdentifier { get; set; }
         
-        public ICollection<RoleLevelRuleDto> UserSkills { get; set; }
-    }
-
-    public class RoleLevelDto : DescriptionEntity
-    {
-        
-    }
-
-    public class RoleTypeDto : NamedEntity
-    {
-        public string Title { get; set; }
+        public ICollection<UserSkillDto> UserSkills { get; set; }
     }
 }

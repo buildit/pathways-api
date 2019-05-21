@@ -10,6 +10,10 @@ namespace pathways_api.Data
         {
             this.CreateMap<User, UserDto>();
             this.CreateMap<UserDto, User>();
+            this.CreateMap<RoleLevelDto, RoleLevel>();
+            this.CreateMap<RoleLevel, RoleLevelDto>();
+            this.CreateMap<RoleTypeDto, RoleType>();
+            this.CreateMap<RoleType, RoleTypeDto>();
             /*this.CreateMap<UserInterest, DisciplineDto>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(src => src.DisciplineId))
                 .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Discipline.Name));
