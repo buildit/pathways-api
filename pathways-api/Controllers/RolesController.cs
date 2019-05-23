@@ -4,11 +4,8 @@ namespace pathways_api.Controllers
     using AutoMapper;
     using Data.Entities;
     using Data.Mappers;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Caching.Memory;
     using pathways_common.Controllers;
-    using pathways_common.Extensions;
     using Services.Interfaces;
 
     public class RolesController : ApiController
@@ -28,7 +25,7 @@ namespace pathways_api.Controllers
         public IActionResult GetAllTypes()
         {
             var results = this.roleTypeService.GetAll();
-            IList<UserDto> userDtos = this.mapper.Map<IList<UserDto>>(results);
+            IList<RoleTypeDto> userDtos = this.mapper.Map<IList<RoleTypeDto>>(results);
             return this.Ok(userDtos);
         }
 
@@ -36,7 +33,7 @@ namespace pathways_api.Controllers
         public IActionResult GetAllLevels()
         {
             var results = this.roleLevelService.GetAll();
-            IList<UserDto> userDtos = this.mapper.Map<IList<UserDto>>(results);
+            IList<RoleLevelDto> userDtos = this.mapper.Map<IList<RoleLevelDto>>(results);
             return this.Ok(userDtos);
         }
 

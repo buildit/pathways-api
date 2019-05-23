@@ -43,7 +43,7 @@ namespace pathways_api.Controllers
                 Token = tokenString
             });
         }
-        
+
         [HttpGet("{username}")]
         public IActionResult GetByName(string username)
         {
@@ -52,7 +52,19 @@ namespace pathways_api.Controllers
             return this.Ok(userDto);
         }
 
-        
+        [HttpPut("{username}")]
+        public IActionResult Update(string username, [FromBody] UserDto user)
+        {
+            User dbUser = this.userService.Retrieve(username);
+            User newUser = this.mapper.Map<User>(user);
+            
+            dbUser.DirectoryName = newUser.DirectoryName;
+            dbUser.Name = newUser.Name;
+            
+            this.userService.Update(dbUser);
+            return this.Ok(newUser);
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()

@@ -13,10 +13,12 @@ namespace pathways_api.Services
         {
         }
 
-        protected abstract Func<T, object> UpdateKey { get; }
+        public void Update(T entity)
+        {
+            this.context.Update(entity);
+            this.context.SaveChanges();
+        }
 
-        protected abstract void MapUpdateFields(T targetObject, T sourceObject);
-        
         public void UpdateRange(IList<T> list)
         {
             foreach (T item in list)
@@ -24,7 +26,7 @@ namespace pathways_api.Services
                 T dbItem = this.collection.FirstOrDefault(i => UpdateKey(i) == UpdateKey(item));
                 if (dbItem == null)
                 {
-                    dbItem= item;
+                    dbItem = item;
                     this.context.Add(dbItem);
                 }
                 else
@@ -36,5 +38,9 @@ namespace pathways_api.Services
 
             this.context.SaveChanges();
         }
+
+        protected abstract Func<T, object> UpdateKey { get; }
+
+        protected abstract void MapUpdateFields(T targetObject, T sourceObject);
     }
 }

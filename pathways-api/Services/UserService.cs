@@ -43,11 +43,6 @@ namespace pathways_api.Services
             return func();
         }
 
-        public void Update(User entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Delete(int id)
         {
             throw new System.NotImplementedException();
