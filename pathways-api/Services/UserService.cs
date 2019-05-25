@@ -1,19 +1,22 @@
 namespace pathways_api.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Data;
     using Data.Entities;
     using Interfaces;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
     using pathways_common;
-    using pathways_common.Extensions;
 
     public class UserService : PathwaysDataQueryService<User>, IUserService
     {
         public UserService(DataContext context) : base(context, context.Users)
         {
+        }
+
+        protected override Func<User, object> UpdateKey
+        {
+            get { return u => u.Username; }
         }
 
         public User Create(User user)
@@ -45,12 +48,12 @@ namespace pathways_api.Services
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public User GetByIdWithIncludes(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public User Retrieve(string name)
@@ -66,11 +69,6 @@ namespace pathways_api.Services
 
             user = new User(adEmail, adName);
             return this.Create(user);
-        }
-
-        protected override Func<User, object> UpdateKey
-        {
-            get { return u => u.Username; }
         }
 
         protected override void MapUpdateFields(User targetObject, User sourceObject)

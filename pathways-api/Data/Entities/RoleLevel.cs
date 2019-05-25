@@ -1,15 +1,12 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace pathways_api.Data.Entities
 {
-    using pathways_common.Entities;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// associate, senior, principle
     /// </summary>
     [Table("rolelevel", Schema = "skills")]
-    public class RoleLevel : DescriptionEntity
+    public class RoleLevel : LeveledEntity
     {
-        public int Level { get; set; }
     }
 }

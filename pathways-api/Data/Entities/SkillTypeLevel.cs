@@ -6,15 +6,17 @@ namespace pathways_api.Data.Entities
     /// <summary>
     /// "description": "Evaluates delivery and recruitment parties and seek innovation through technology and human approach.
     /// </summary>
-    [Table("skilllevel", Schema = "skills")]
-    public class SkillLevelDescriptions : IdEntity
+    [Table("skilltypelevel", Schema = "skills")]
+    public class SkillTypeLevel : IdEntity
     {
         public int SkillTypeId { get; set; }
+
         public SkillType SkillType { get; set; }
 
         public int SkillLevelId { get; set; }
+
         public SkillLevel SkillLevel { get; set; }
-        
+
         public string Description { get; set; }
     }
 }

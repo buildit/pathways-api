@@ -5,8 +5,8 @@ namespace pathways_api.Data.Entities
     [Table("userskills", Schema = "assessment")]
     public class UserSkill
     {
-        //Self assessed skills
-        //example: User, Coding, 5
+        // Self assessed skills
+        // example: User, Coding, 5
         public int UserId { get; set; }
 
         public User User { get; set; }

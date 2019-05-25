@@ -1,7 +1,7 @@
-using pathways_api.Data.Entities;
-
 namespace pathways_api.Data.Mappers
 {
+    using Entities;
+
     public class RoleLevelRuleDto
     {
         public int RoleTypeId { get; set; }

@@ -17,11 +17,6 @@ namespace pathways_api.Services
             throw new NotImplementedException();
         }
 
-        public void Update(RoleType entity)
-        {
-            this.context.RoleTypes.Update(entity);
-        }
-
         public void Delete(int id)
         {
             this.context.RoleTypes.Remove(this.collection.First(e => e.Id == id));

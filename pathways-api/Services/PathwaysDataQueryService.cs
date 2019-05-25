@@ -13,6 +13,8 @@ namespace pathways_api.Services
         {
         }
 
+        protected abstract Func<T, object> UpdateKey { get; }
+
         public void Update(T entity)
         {
             this.context.Update(entity);
@@ -23,7 +25,7 @@ namespace pathways_api.Services
         {
             foreach (T item in list)
             {
-                T dbItem = this.collection.FirstOrDefault(i => UpdateKey(i) == UpdateKey(item));
+                T dbItem = this.collection.FirstOrDefault(i => this.UpdateKey(i) == this.UpdateKey(item));
                 if (dbItem == null)
                 {
                     dbItem = item;
@@ -38,8 +40,6 @@ namespace pathways_api.Services
 
             this.context.SaveChanges();
         }
-
-        protected abstract Func<T, object> UpdateKey { get; }
 
         protected abstract void MapUpdateFields(T targetObject, T sourceObject);
     }

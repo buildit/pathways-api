@@ -8,13 +8,13 @@ namespace pathways_api.Controllers
     using pathways_common.Controllers;
     using Services.Interfaces;
 
-    public class RolesController : ApiController
+    public class SkillsController : ApiController
     {
         private readonly IRoleLevelService roleLevelService;
         private readonly IRoleTypeService roleTypeService;
         private readonly IMapper mapper;
 
-        public RolesController(IRoleLevelService roleLevelService, IRoleTypeService roleTypeService, IMapper mapper)
+        public SkillsController(IRoleLevelService roleLevelService, IRoleTypeService roleTypeService, IMapper mapper)
         {
             this.roleLevelService = roleLevelService;
             this.roleTypeService = roleTypeService;

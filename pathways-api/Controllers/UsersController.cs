@@ -13,8 +13,8 @@ namespace pathways_api.Controllers
 
     public class UsersController : CacheResolvingController<User>
     {
-        private readonly IUserService userService;
         private readonly IMapper mapper;
+        private readonly IUserService userService;
 
         public UsersController(IUserService userService, IMemoryCache memoryCache, IMapper mapper)
             : base(userService, memoryCache)
@@ -57,10 +57,10 @@ namespace pathways_api.Controllers
         {
             User dbUser = this.userService.Retrieve(username);
             User newUser = this.mapper.Map<User>(user);
-            
+
             dbUser.DirectoryName = newUser.DirectoryName;
             dbUser.Name = newUser.Name;
-            
+
             this.userService.Update(dbUser);
             return this.Ok(newUser);
         }

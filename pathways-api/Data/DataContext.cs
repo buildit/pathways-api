@@ -9,7 +9,8 @@ namespace pathways_api.Data
         {
         }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
         {
         }
 
@@ -25,17 +26,19 @@ namespace pathways_api.Data
 
         public virtual DbSet<SkillType> SkillTypes { get; set; }
 
+        public virtual DbSet<SkillTypeLevel> SkillTypeLevels { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserSkill>()
-                .HasKey(e => new {e.UserId, e.SkillTypeId});
+                .HasKey(e => new { e.UserId, e.SkillTypeId });
             modelBuilder.Entity<UserSkill>()
                 .HasOne(e => e.User)
                 .WithMany(e => e.UserSkills)
-                .HasForeignKey(e => new {e.UserId});
+                .HasForeignKey(e => new { e.UserId });
 
             modelBuilder.Entity<RoleLevelRule>()
-                .HasKey(e => new {e.RoleTypeId, e.RoleLevelId, e.SkillTypeId, e.SkillLevelId});
+                .HasKey(e => new { e.RoleTypeId, e.RoleLevelId, e.SkillTypeId, e.SkillLevelId });
         }
     }
 }

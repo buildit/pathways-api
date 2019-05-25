@@ -7,7 +7,7 @@ namespace pathways_api.Data.Mappers
     public class UserDto : ADUserEntity
     {
         public string DomoIdentifier { get; set; }
-        
+
         public ICollection<UserSkillDto> UserSkills { get; set; }
     }
 }

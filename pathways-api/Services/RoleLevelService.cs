@@ -16,11 +16,6 @@ namespace pathways_api.Services
             throw new NotImplementedException();
         }
 
-        public void Update(RoleLevel entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(int id)
         {
             throw new NotImplementedException();
