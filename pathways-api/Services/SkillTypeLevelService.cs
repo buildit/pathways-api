@@ -11,11 +11,9 @@ namespace pathways_api.Services
         {
         }
 
-        protected override Func<SkillTypeLevel, object> UpdateKey { get; }
-
-        protected override void MapUpdateFields(SkillTypeLevel targetObject, SkillTypeLevel sourceObject)
+        protected override Func<SkillTypeLevel, object> UpdateKey
         {
-            throw new NotImplementedException();
+            get { return st => $"{st.SkillLevelId}|{st.SkillTypeId}"; }
         }
 
         public SkillTypeLevel Create(SkillTypeLevel entity)
@@ -29,6 +27,11 @@ namespace pathways_api.Services
         }
 
         public SkillTypeLevel GetByIdWithIncludes(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void MapUpdateFields(SkillTypeLevel targetObject, SkillTypeLevel sourceObject)
         {
             throw new NotImplementedException();
         }

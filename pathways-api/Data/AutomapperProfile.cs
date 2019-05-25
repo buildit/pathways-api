@@ -16,6 +16,7 @@ namespace pathways_api.Data
             this.CreateMap<RoleType, RoleTypeDto>();
             this.CreateMap<SkillType, SkillTypeDto>().ReverseMap();
             this.CreateMap<SkillLevel, SkillLevelDto>().ReverseMap();
+            this.CreateMap<SkillTypeLevel, SkillTypeLevelDto>().ReverseMap();
             /*this.CreateMap<UserInterest, DisciplineDto>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(src => src.DisciplineId))
                 .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Discipline.Name));
