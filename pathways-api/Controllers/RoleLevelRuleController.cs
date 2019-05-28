@@ -22,7 +22,7 @@ namespace pathways_api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            IEnumerable<RoleLevelRule> results = this.service.GetAll();
+            IEnumerable<RoleLevelRule> results = this.service.GetAllLoaded();
             IList<RoleLevelRuleDto> ruleDtos = this.mapper.Map<IList<RoleLevelRuleDto>>(results);
             return this.Ok(ruleDtos);
         }

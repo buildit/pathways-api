@@ -5,6 +5,7 @@ namespace pathways_api.Services
     using Data;
     using Data.Entities;
     using Interfaces;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
     using pathways_common;
 
@@ -58,7 +59,9 @@ namespace pathways_api.Services
 
         public User Retrieve(string name)
         {
-            return this.collection.FirstOrDefault(u => u.Username == name);
+            return this.context.Users
+                .Include(u => u.UserSkills)
+                .FirstOrDefault(u => u.Username == name);
         }
 
         public User RetrieveOrCreate(string adEmail, string adName)

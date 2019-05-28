@@ -1,9 +1,12 @@
 namespace pathways_api.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Data;
     using Data.Entities;
     using Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class RoleLevelRuleService : PathwaysDataQueryService<RoleLevelRule>, IRoleLevelRuleService
     {
@@ -29,6 +32,15 @@ namespace pathways_api.Services
         public RoleLevelRule GetByIdWithIncludes(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<RoleLevelRule> GetAllLoaded()
+        {
+            return this.GetAll().AsQueryable()
+                .Include(l => l.RoleLevel)
+                .Include(l => l.RoleType)
+                .Include(l => l.SkillLevel)
+                .Include(l => l.SkillType);
         }
 
         protected override void MapUpdateFields(RoleLevelRule targetObject, RoleLevelRule sourceObject)
