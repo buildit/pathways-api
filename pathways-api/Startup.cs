@@ -21,7 +21,7 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            base.ConfigurePathwaysServices(services);
+            this.ConfigurePathwaysServices(services);
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserService, UserService>();
@@ -30,11 +30,13 @@
             services.AddScoped<ISkillLevelService, SkillLevelService>();
             services.AddScoped<ISkillTypeService, SkillTypeService>();
             services.AddScoped<ISkillTypeLevelService, SkillTypeLevelService>();
+            services.AddScoped<IRoleLevelRuleService, RoleLevelRuleService>();
+            services.AddScoped<IUserSkillService, UserSkillService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            base.ConfigurePathways(app, env);
+            this.ConfigurePathways(app, env);
         }
 
         protected override void AddEntityFramework(IServiceCollection services)

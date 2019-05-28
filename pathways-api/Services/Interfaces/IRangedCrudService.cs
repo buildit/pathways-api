@@ -5,6 +5,6 @@ namespace pathways_api.Services.Interfaces
 
     public interface IRangedCrudService<T> : ICrudService<T>
     {
-        void UpdateRange(IList<T> list);
+        void UpdateRange(IList<T> list, bool assumeCreate = false);
     }
 }

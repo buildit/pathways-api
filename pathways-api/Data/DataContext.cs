@@ -20,6 +20,8 @@ namespace pathways_api.Data
 
         public virtual DbSet<RoleLevel> RoleLevels { get; set; }
 
+        public virtual DbSet<RoleLevelRule> RoleLevelRules { get; set; }
+
         public virtual DbSet<UserSkill> UserSkills { get; set; }
 
         public virtual DbSet<SkillLevel> SkillLevels { get; set; }
@@ -31,14 +33,29 @@ namespace pathways_api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserSkill>()
-                .HasKey(e => new { e.UserId, e.SkillTypeId });
+                .HasIndex(e => new { e.UserId, e.SkillTypeId })
+                .IsUnique();
+
+            modelBuilder.Entity<UserSkill>()
+                .HasKey(e => e.Id);
+
             modelBuilder.Entity<UserSkill>()
                 .HasOne(e => e.User)
                 .WithMany(e => e.UserSkills)
                 .HasForeignKey(e => new { e.UserId });
 
             modelBuilder.Entity<RoleLevelRule>()
-                .HasKey(e => new { e.RoleTypeId, e.RoleLevelId, e.SkillTypeId, e.SkillLevelId });
+                .HasIndex(e => new { e.RoleTypeId, e.RoleLevelId, e.SkillTypeId, e.SkillLevelId })
+                .IsUnique();
+
+            modelBuilder.Entity<RoleLevelRule>()
+                .HasKey(e => e.Id);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

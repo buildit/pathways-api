@@ -21,10 +21,16 @@ namespace pathways_api.Services
             this.context.SaveChanges();
         }
 
-        public void UpdateRange(IList<T> list)
+        public void UpdateRange(IList<T> list, bool assumeCreate = false)
         {
             foreach (T item in list)
             {
+                if (assumeCreate)
+                {
+                    this.context.Add(item);
+                    continue;
+                }
+
                 T dbItem = this.collection.FirstOrDefault(i => this.UpdateKey(i) == this.UpdateKey(item));
                 if (dbItem == null)
                 {
