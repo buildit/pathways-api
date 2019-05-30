@@ -48,6 +48,17 @@ namespace pathways_api.Data
                 .HasIndex(e => new { e.RoleTypeId, e.RoleLevelId, e.SkillTypeId, e.SkillLevelId })
                 .IsUnique();
 
+            modelBuilder.Entity<User>()
+                .HasIndex(e => e.DomoIdentifier)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(e => e.Username)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasKey(e => e.Id);
+
             modelBuilder.Entity<RoleLevelRule>()
                 .HasKey(e => e.Id);
         }
