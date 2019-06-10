@@ -6,16 +6,15 @@ namespace pathways_api.Data.Entities
     using pathways_common.Entities;
 
     [Table("users", Schema = "admin")]
-    public class User : ADUserEntity
+    public class User : PathwaysUser
     {
         public User()
         {
         }
 
-        public User(string adEmail, string adName)
+        public User(string username, string organizationId, string directoryName)
+            : base(username, organizationId, directoryName)
         {
-            this.Username = adEmail;
-            this.DirectoryName = adName;
         }
 
         public string DomoIdentifier { get; set; }

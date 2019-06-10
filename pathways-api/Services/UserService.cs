@@ -64,13 +64,19 @@ namespace pathways_api.Services
                 .FirstOrDefault(u => u.Username == name);
         }
 
-        public User RetrieveOrCreate(string adEmail, string adName)
+        public void SetLogonTime(User user)
         {
-            User user = this.context.Users.FirstOrDefault(u => u.Username == adEmail && u.DirectoryName == adName);
+            user.LastLogin = DateTime.Now;
+            this.context.SaveChanges();
+        }
 
-            if (user != null || string.IsNullOrEmpty(adEmail)) return user;
+        public User RetrieveOrCreate(string graphEmail, string adUsername, string name)
+        {
+            User user = this.collection.FirstOrDefault(u => u.Username == graphEmail && u.Name == name && u.OrganizationId == adUsername);
 
-            user = new User(adEmail, adName);
+            if (user != null || string.IsNullOrEmpty(adUsername)) return user;
+
+            user = new User(graphEmail, adUsername, name);
             return this.Create(user);
         }
 

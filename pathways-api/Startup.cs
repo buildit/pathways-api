@@ -9,6 +9,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using pathways_common.Core;
+    using pathways_common.Interfaces.Services;
+    using pathways_common.Services;
     using Services;
     using Services.Interfaces;
 
@@ -32,6 +34,7 @@
             services.AddScoped<ISkillTypeLevelService, SkillTypeLevelService>();
             services.AddScoped<IRoleLevelRuleService, RoleLevelRuleService>();
             services.AddScoped<IUserSkillService, UserSkillService>();
+            services.AddScoped<IMSGraphService, MicrosoftGraphService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
