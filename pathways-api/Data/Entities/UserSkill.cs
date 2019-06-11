@@ -8,7 +8,7 @@ namespace pathways_api.Data.Entities
     ///     example: User, Coding, 5
     /// </summary>
     [Table("userskills", Schema = "assessment")]
-    public class UserSkill : IdEntity
+    public class UserSkill : AuditableEntity
     {
         public int UserId { get; set; }
 

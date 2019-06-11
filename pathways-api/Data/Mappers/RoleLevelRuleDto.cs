@@ -19,5 +19,7 @@ namespace pathways_api.Data.Mappers
         public int SkillLevelId { get; set; }
 
         public SkillLevel SkillLevel { get; set; }
+
+        public bool? EssentialSkill { get; set; }
     }
 }

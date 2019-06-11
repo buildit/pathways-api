@@ -2,13 +2,14 @@ namespace pathways_api.Data.Entities
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using pathways_common.Entities;
+    using pathways_common.Interfaces.Entities;
 
     /// <summary>
     /// rules to qualify role level
     /// example: Senior, Engineer, Coding, 5
     /// </summary>
     [Table("rolelevelrule", Schema = "admin")]
-    public class RoleLevelRule : IdEntity
+    public class RoleLevelRule : AuditableEntity
     {
         public int RoleTypeId { get; set; }
 
@@ -25,5 +26,7 @@ namespace pathways_api.Data.Entities
         public int SkillLevelId { get; set; }
 
         public RoleLevel SkillLevel { get; set; }
+
+        public bool? EssentialSkill { get; set; }
     }
 }

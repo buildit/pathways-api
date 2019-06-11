@@ -47,16 +47,6 @@ namespace pathways_api.Services
             return func();
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetByIdWithIncludes(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public User Retrieve(string name)
         {
             return this.context.Users
@@ -83,6 +73,16 @@ namespace pathways_api.Services
         protected override void MapUpdateFields(User targetObject, User sourceObject)
         {
             targetObject.DomoIdentifier = sourceObject.DomoIdentifier;
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetByIdWithIncludes(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

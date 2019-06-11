@@ -8,9 +8,9 @@ namespace pathways_api.Controllers
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Graph;
     using pathways_common.Authentication;
+    using pathways_common.Authentication.Extensions;
     using pathways_common.Controllers;
     using pathways_common.Core;
-    using pathways_common.Extensions;
     using pathways_common.Interfaces.Services;
     using Services.Interfaces;
     using User = Data.Entities.User;

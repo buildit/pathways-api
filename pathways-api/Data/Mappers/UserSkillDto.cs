@@ -1,8 +1,9 @@
 namespace pathways_api.Data.Mappers
 {
     using Entities;
+    using pathways_common.Entities;
 
-    public class UserSkillDto
+    public class UserSkillDto : AuditableEntity
     {
         public int UserId { get; set; }
 
