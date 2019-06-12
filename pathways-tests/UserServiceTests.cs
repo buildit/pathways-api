@@ -3,7 +3,7 @@ using Xunit;
 
 namespace pathways_tests
 {
-    public class UnitTest1
+    public class UserServiceTests
     {
         [Fact]
         public void Test1()
