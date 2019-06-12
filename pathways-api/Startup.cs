@@ -57,7 +57,6 @@ namespace pathways_api
              
             // configure DI for application services
             services.AddScoped<IGetUserDataService, GetUserDataService>();
-            services.AddScoped<ISetUserDataService, SetUserDataService>();
             services.AddScoped<ISkillsService, SkillsService>();
             services.AddScoped<IUserService, UserService>();
         }

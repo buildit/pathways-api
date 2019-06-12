@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage;
 using pathways_api.Data.Mappers;
 
 namespace pathways_api.Controllers
@@ -9,25 +10,18 @@ namespace pathways_api.Controllers
     {
         //Store skills info in Domo and Database
         
-        // POST api/values
+        // POST api/UsersSkills
         [HttpPost]
-        public void PostUsersSkill(UserSkillDto userSkillSelection)
+        public void PostUsersSkills(UserSkillDto userSkillSelection)
         {
-            //if selection doesnt exist, create, otherwise update
+            //TODO: Save user skill selection
         }
         
-        // GET api/values
+        // GET api/UsersSkills
         [HttpGet]       
         public void GetUsersSkills()
         {
-           
-        }
-        
-        [HttpGet]       
-        public void GetAccessToken()
-        {
-
-                    
+           //TODO: retrieve userskills from DB for domo
         }
     }
 }
