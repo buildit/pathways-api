@@ -1,8 +1,12 @@
-﻿namespace pathways_api
+namespace pathways_api
 {
     using System;
     using AutoMapper;
     using Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -13,6 +17,11 @@
     using pathways_common.Services;
     using Services;
     using Services.Interfaces;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using pathways_api.Data;
+using pathways_api.Services;
+using pathways_api.Services.Interfaces;
 
     public class Startup : PathwaysStartup
     {
@@ -35,6 +44,12 @@
             services.AddScoped<IRoleLevelRuleService, RoleLevelRuleService>();
             services.AddScoped<IUserSkillService, UserSkillService>();
             services.AddScoped<IMSGraphService, MicrosoftGraphService>();
+            services.Configure<DomoClient>(Configuration.GetSection("DomoClient"));
+
+            // configure DI for application services
+            services.AddScoped<IGetUserDataService, GetUserDataService>();
+            services.AddScoped<ISkillsService, SkillsService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
