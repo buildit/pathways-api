@@ -12,7 +12,7 @@ using pathways_api.Data;
 
 namespace pathways_api.Services
 {
-    public class GetUserDataService : IGetUserDataService
+    public class GetUserDataService : IUserDataService
     {            
         public async Task<string> GetAccessTokenAsync()
         {
