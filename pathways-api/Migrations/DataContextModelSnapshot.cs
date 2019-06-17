@@ -24,24 +24,37 @@ namespace pathways_api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Level");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("rolelevels");
+                    b.ToTable("rolelevel","skills");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.RoleLevelRule", b =>
                 {
-                    b.Property<int>("RoleTypeId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<bool?>("EssentialSkill");
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<int>("RoleLevelId");
 
-                    b.Property<int>("SkillTypeId");
+                    b.Property<int>("RoleTypeId");
 
                     b.Property<int>("SkillLevelId");
 
-                    b.HasKey("RoleTypeId", "RoleLevelId", "SkillTypeId", "SkillLevelId");
+                    b.Property<int>("SkillTypeId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleLevelId");
 
@@ -49,7 +62,10 @@ namespace pathways_api.Migrations
 
                     b.HasIndex("SkillTypeId");
 
-                    b.ToTable("RoleLevelRule");
+                    b.HasIndex("RoleTypeId", "RoleLevelId", "SkillTypeId", "SkillLevelId")
+                        .IsUnique();
+
+                    b.ToTable("rolelevelrule","admin");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.RoleType", b =>
@@ -59,9 +75,11 @@ namespace pathways_api.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("Title");
+
                     b.HasKey("Id");
 
-                    b.ToTable("rolestypes");
+                    b.ToTable("roletype","skills");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.SkillLevel", b =>
@@ -69,11 +87,15 @@ namespace pathways_api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Level");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("skilllevel");
+                    b.ToTable("skilllevel","skills");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.SkillType", b =>
@@ -81,11 +103,33 @@ namespace pathways_api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("skilltypes");
+                    b.ToTable("skilltype","skills");
+                });
+
+            modelBuilder.Entity("pathways_api.Data.Entities.SkillTypeLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("SkillLevelId");
+
+                    b.Property<int>("SkillTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkillLevelId");
+
+                    b.HasIndex("SkillTypeId");
+
+                    b.ToTable("skilltypelevel","skills");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.User", b =>
@@ -93,52 +137,54 @@ namespace pathways_api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("DirectoryName");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("DomoIdentifier");
 
-                    b.Property<int>("UserLoginId");
+                    b.Property<DateTime>("LastLogin");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Name");
 
-                    b.HasIndex("UserLoginId");
-
-                    b.ToTable("users");
-                });
-
-            modelBuilder.Entity("pathways_api.Data.Entities.UserLogin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool?>("Deactivated");
-
-                    b.Property<byte[]>("PasswordHash");
-
-                    b.Property<byte[]>("PasswordSalt");
+                    b.Property<string>("OrganizationId");
 
                     b.Property<string>("Username");
 
                     b.HasKey("Id");
 
-                    b.ToTable("userlogins");
+                    b.HasIndex("DomoIdentifier")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("users","admin");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.UserSkill", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("SkillTypeId");
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<int>("SkillLevelId");
 
-                    b.HasKey("UserId", "SkillTypeId");
+                    b.Property<int>("SkillTypeId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("SkillLevelId");
 
                     b.HasIndex("SkillTypeId");
 
-                    b.ToTable("userskills");
+                    b.HasIndex("UserId", "SkillTypeId")
+                        .IsUnique();
+
+                    b.ToTable("userskills","assessment");
                 });
 
             modelBuilder.Entity("pathways_api.Data.Entities.RoleLevelRule", b =>
@@ -158,17 +204,22 @@ namespace pathways_api.Migrations
                         .HasForeignKey("SkillLevelId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("pathways_api.Data.Entities.RoleLevel", "SkillType")
+                    b.HasOne("pathways_api.Data.Entities.SkillType", "SkillType")
                         .WithMany()
                         .HasForeignKey("SkillTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("pathways_api.Data.Entities.User", b =>
+            modelBuilder.Entity("pathways_api.Data.Entities.SkillTypeLevel", b =>
                 {
-                    b.HasOne("pathways_api.Data.Entities.UserLogin", "UserLogin")
+                    b.HasOne("pathways_api.Data.Entities.SkillLevel", "SkillLevel")
                         .WithMany()
-                        .HasForeignKey("UserLoginId")
+                        .HasForeignKey("SkillLevelId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("pathways_api.Data.Entities.SkillType", "SkillType")
+                        .WithMany()
+                        .HasForeignKey("SkillTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
