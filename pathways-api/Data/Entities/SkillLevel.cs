@@ -1,10 +1,12 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace pathways_api.Data.Entities
 {
-    [Table("skilllevel")]
-    public class SkillLevel : NamedEntity
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    /// <summary>
+    /// Working, expert, aware, practitioner
+    /// </summary>
+    [Table("skilllevel", Schema = "skills")]
+    public class SkillLevel : LeveledEntity
     {
-        
     }
 }

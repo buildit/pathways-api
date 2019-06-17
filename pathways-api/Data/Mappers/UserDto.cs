@@ -1,20 +1,13 @@
 using System.Collections.Generic;
-using pathways_api.Data.Entities;
 
 namespace pathways_api.Data.Mappers
 {
-  public class UserDto
-  {
-    public int Id { get; set; }
-    
-    public int UserLoginId { get; set; }
+    using pathways_common.Entities;
 
-    public UserLoginDto UserLogin { get; set; }
+    public class UserDto : PathwaysUser
+    {
+        public string DomoIdentifier { get; set; }
 
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
-
-    public ICollection<UserSkillDto> UserSkills { get; set; }
-  }
+        public ICollection<UserSkillDto> UserSkills { get; set; }
+    }
 }
