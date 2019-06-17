@@ -3,12 +3,19 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using pathways_api.Data.Mappers;
+using pathways_api.Services.Interfaces;
 
 namespace pathways_api.Controllers
 {
     public class SkillsController : PathwaysController
     {
         //Store skills info in Domo and Database
+        private readonly ISkillsService _skillsService;
+
+        public SkillsController(ISkillsService skillsService)
+        {
+            _skillsService = skillsService;
+        }
         
         // POST api/UsersSkills
         [HttpPost]
@@ -21,7 +28,7 @@ namespace pathways_api.Controllers
         [HttpGet]       
         public void GetUsersSkills()
         {
-           //TODO: retrieve userskills from DB for domo
+            var usersSkills = _skillsService.GetUsersSkills();
         }
     }
 }

@@ -15,6 +15,6 @@ namespace pathways_api.Data.Mappers
 
     public string LastName { get; set; }
 
-    public ICollection<RoleLevelRuleDto> UserSkills { get; set; }
+    public ICollection<UserSkillDto> UserSkills { get; set; }
   }
 }

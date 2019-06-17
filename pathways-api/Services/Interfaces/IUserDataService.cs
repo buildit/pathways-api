@@ -4,7 +4,7 @@ using pathways_api.Data.Mappers;
 
 namespace pathways_api.Services.Interfaces
 {
-    public interface IGetUserDataService
+    public interface IUserDataService
     {
         ///<summary>
         /// get access token from domo
