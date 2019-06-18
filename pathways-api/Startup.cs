@@ -47,7 +47,7 @@ using pathways_api.Services.Interfaces;
             services.Configure<DomoClient>(Configuration.GetSection("DomoClient"));
 
             // configure DI for application services
-            services.AddScoped<IGetUserDataService, GetUserDataService>();
+            services.AddScoped<IUserDataService, userDataService>();
             services.AddScoped<ISkillsService, SkillsService>();
             services.AddScoped<IUserService, UserService>();
         }

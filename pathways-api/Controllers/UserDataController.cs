@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using pathways_api.Data.Mappers;
+using pathways_api.Services;
 using pathways_api.Services.Interfaces;
 
 namespace pathways_api.Controllers
@@ -20,21 +21,20 @@ namespace pathways_api.Controllers
     public class UserDataController : ControllerBase //PathwaysController
     {
         //private readonly DomoClient _domoClient;
-        private readonly IGetUserDataService _getUserDataService;
-        
+        private readonly IUserDataService _userDataService;    
 
-        public UserDataController(IGetUserDataService getUserDataService)//DomoClient domoClient, 
+        public UserDataController(IUserDataService userDataService)//DomoClient domoClient, 
         {
             //_domoClient = domoClient;
-            _getUserDataService = getUserDataService;
+            _userDataService = userDataService;
         }
 
         // GET api/UserData
         [HttpGet]
         public async Task<List<UserDataDto>> GetUserDataAsync()
         {
-            var accessToken = await _getUserDataService.GetAccessTokenAsync();
-            var userData = await _getUserDataService.GetUsersDataAsync(accessToken);
+            var accessToken = await _userDataService.GetAccessTokenAsync();
+            var userData = await _userDataService.GetUsersDataAsync(accessToken);
            
             return userData;
         }
