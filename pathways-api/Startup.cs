@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+    using Data.Entities;
+    using Handlers;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -45,6 +48,13 @@ using pathways_api.Services.Interfaces;
             services.AddScoped<IUserSkillService, UserSkillService>();
             services.AddScoped<IMSGraphService, MicrosoftGraphService>();
             services.Configure<DomoClient>(Configuration.GetSection("DomoClient"));
+            services.AddTransient<IAuthorizationHandler, ApiKeyRequirementHandler>();
+            services.AddAuthorization(authConfig =>
+            {
+                authConfig.AddPolicy("ApiKeyPolicy",
+                    policyBuilder => policyBuilder
+                        .AddRequirements(new ApiKeyRequirement(new[] { "userSkillSecretDomo" })));
+            });
 
             // configure DI for application services
             services.AddScoped<IUserDataService, userDataService>();

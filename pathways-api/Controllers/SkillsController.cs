@@ -7,6 +7,10 @@ using pathways_api.Services.Interfaces;
 
 namespace pathways_api.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+
     public class SkillsController : PathwaysController
     {
         //Store skills info in Domo and Database
@@ -25,10 +29,13 @@ namespace pathways_api.Controllers
         }
         
         // GET api/UsersSkills
-        [HttpGet]       
-        public void GetUsersSkills()
+        [HttpGet]    
+        [Authorize(Policy = "ApiKeyPolicy")]
+        public List<UserDto> GetUsersSkills()
         {
             var usersSkills = _skillsService.GetUsersSkills();
+
+            return usersSkills;
         }
     }
 }
