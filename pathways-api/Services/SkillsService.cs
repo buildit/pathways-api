@@ -48,9 +48,6 @@ namespace pathways_api.Services
                 var userDto = new UserDto()
                 {
                     Id = user.Id,
-                    UserLoginId = user.UserLoginId,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
                     UserSkills = userSkillsDto
                 };
 
@@ -83,9 +80,6 @@ namespace pathways_api.Services
             var userDto = new UserDto()
             {
                 Id = userData.Id,
-                UserLoginId = userData.UserLoginId,
-                FirstName = userData.FirstName,
-                LastName = userData.LastName,
                 UserSkills = userSkillsDto
             };
 

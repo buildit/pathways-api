@@ -10,6 +10,7 @@ namespace pathways_api.Data.Entities
     {
         public User()
         {
+            
         }
 
         public User(string username, string organizationId, string directoryName)
@@ -18,6 +19,8 @@ namespace pathways_api.Data.Entities
         }
 
         public string DomoIdentifier { get; set; }
+        
+        public bool IsActive { get; set; }
 
         public ICollection<UserSkill> UserSkills { get; set; }
     }
