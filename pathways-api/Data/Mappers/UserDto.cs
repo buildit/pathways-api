@@ -7,6 +7,7 @@ namespace pathways_api.Data.Mappers
     public class UserDto : PathwaysUser
     {
         public string DomoIdentifier { get; set; }
+        public bool IsActive { get; set; }
 
         public ICollection<UserSkillDto> UserSkills { get; set; }
     }

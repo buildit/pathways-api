@@ -10,13 +10,18 @@ using pathways_api.Services.Interfaces;
 
 namespace pathways_api.Services
 {
+    using AutoMapper;
+    using Microsoft.Graph;
+
     public class SkillsService: ISkillsService
     {
         private DataContext context;
+        private readonly IMapper mapper;
 
-        public SkillsService(DataContext context)
+        public SkillsService(DataContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         
         public List<UserDto> GetUsersSkills()
@@ -30,21 +35,8 @@ namespace pathways_api.Services
             {
                 var userSkills = usersSkills.Where(x => x.UserId == user.Id).ToList(); //get user specific skills
 
-                var userSkillsDto = new List<UserSkillDto>();
-                foreach (var userSkill in userSkills)
-                {
-                    //TODO: Use automapper
-                    var skill = new UserSkillDto()
-                    {
-                        User = userSkill.User,
-                        SkillLevel = userSkill.SkillLevel,
-                        SkillType = userSkill.SkillType
-                    };
-
-                    userSkillsDto.Add(skill);
-                }
-
-                //TODO: use automapper
+                var userSkillsDto = this.mapper.Map<List<UserSkillDto>>(userSkills);
+                    
                 var userDto = new UserDto()
                 {
                     Id = user.Id,
@@ -62,21 +54,8 @@ namespace pathways_api.Services
             var userData = this.context.Users.Where(x => x.Id == userId)?.First();
             var userSkills = this.context.UserSkills.Where(x => x.UserId == userId).ToList(); //get user skills
             
-            var userSkillsDto = new List<UserSkillDto>();
-            foreach (var userSkill in userSkills)
-            {
-                //TODO: Use automapper
-                var skill = new UserSkillDto()
-                {
-                    User = userSkill.User,
-                    SkillLevel = userSkill.SkillLevel,
-                    SkillType = userSkill.SkillType
-                };
+            var userSkillsDto = this.mapper.Map<List<UserSkillDto>>(userSkills);
 
-                userSkillsDto.Add(skill);
-            }
-            
-            //TODO: Use automapper
             var userDto = new UserDto()
             {
                 Id = userData.Id,
