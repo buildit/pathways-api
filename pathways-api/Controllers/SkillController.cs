@@ -65,16 +65,14 @@ namespace pathways_api.Controllers
             this.typeLevelService.UpdateRange(entityCollection);
             return this.Ok(entityCollection.Count);
         }
-        
-        //Store skills info in Domo and Database        
-        // GET api/UsersSkills
-        [HttpGet]    
+             
+        [HttpGet("usersSkills")]    
         [Authorize(Policy = "ApiKeyPolicy")]
-        public List<UserDto> GetUsersSkills()
+        //Domo get skills
+        public IActionResult GetUsersSkills()
         {
-            var usersSkills = this.skillsService.GetUsersSkills();
-
-            return usersSkills;
+            var userDtos = this.skillsService.GetUsersSkills();
+            return this.Ok(userDtos);
         }
     }
 }
