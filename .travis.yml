@@ -1,0 +1,24 @@
+language: csharp
+mono: none
+branches:
+    only:
+        - dev-0.1
+dotnet: 2.2.105
+dist: xenial
+git:
+    submodules: false
+script:
+    - dotnet publish -c release -r ubuntu.18.04-x64
+    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/learning-together-api/bin/Release/netcoreapp2.2/ubuntu.18.04-x64/publish/* pathwaysuser@pathways.buildit.systems:/home/pathwaysuser/pathways-api
+    - ssh -i ./pathwaysid_rsa pathwaysuser@pathways.buildit.systems 'sudo /bin/systemctl restart pwapi'
+before_script:
+    - openssl aes-256-cbc -K $encrypted_8fd3cfddbccc_key -iv $encrypted_8fd3cfddbccc_iv -in pathwaysid_rsa.enc -out pathwaysid_rsa -d
+    - eval "$(ssh-agent -s)"
+    - chmod 600 ./pathwaysid_rsa
+    - ssh-add ./pathwaysid_rsa
+    - mkdir -p ~/.ssh  &&  echo "Host *" > ~/.ssh/config && echo " StrictHostKeyChecking no" >> ~/.ssh/config
+    - ssh-keyscan -H 18.224.56.34 >> ~/.ssh/known_hosts
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
+#before_install:
+#    - openssl aes-256-cbc -K $encrypted_7283ec8c35b0_key -iv $encrypted_7283ec8c35b0_iv -in learning-together-api/appsettings.Production.json.enc -out learning-together-api/appsettings.Production.json -d
