@@ -25,7 +25,7 @@ namespace pathways_api.Data.Entities
 
         public int SkillLevelId { get; set; }
 
-        public RoleLevel SkillLevel { get; set; }
+        public SkillLevel SkillLevel { get; set; }
 
         public bool? EssentialSkill { get; set; }
     }
