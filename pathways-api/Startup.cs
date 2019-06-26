@@ -3,10 +3,6 @@ namespace pathways_api
     using System;
     using AutoMapper;
     using Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
     using Data.Entities;
     using Handlers;
     using Microsoft.AspNetCore.Authorization;
@@ -20,11 +16,6 @@ using System.Threading.Tasks;
     using pathways_common.Services;
     using Services;
     using Services.Interfaces;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using pathways_api.Data;
-using pathways_api.Services;
-using pathways_api.Services.Interfaces;
 
     public class Startup : PathwaysStartup
     {

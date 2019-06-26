@@ -8,6 +8,5 @@ namespace pathways_api.Controllers
     [Route("api/[controller]")]
     public abstract class PathwaysController : ControllerBase
     {
-        
     }
 }
