@@ -406,3 +406,4 @@ ASALocalRun/
 codealike.json
 appsettings.Production.json
 pathwaysid_rsa
+secrets.tar
