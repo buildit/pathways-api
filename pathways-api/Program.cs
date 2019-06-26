@@ -2,9 +2,6 @@ namespace pathways_api
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using pathways_api.Controllers;
 
     public static class Program
     {

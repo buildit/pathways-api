@@ -65,8 +65,8 @@ namespace pathways_api.Controllers
             this.typeLevelService.UpdateRange(entityCollection);
             return this.Ok(entityCollection.Count);
         }
-             
-        [HttpGet("usersSkills")]    
+
+        [HttpGet("usersSkills")]
         [Authorize(Policy = "ApiKeyPolicy")]
         //Domo get skills
         public IActionResult GetUsersSkills()

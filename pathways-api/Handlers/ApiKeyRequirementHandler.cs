@@ -8,7 +8,6 @@ namespace pathways_api.Handlers
 
     public class ApiKeyRequirementHandler : AuthorizationHandler<ApiKeyRequirement>
     {
-
         public const string API_KEY_HEADER_NAME = "X-API-KEY";
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ApiKeyRequirement requirement)
@@ -21,7 +20,7 @@ namespace pathways_api.Handlers
         {
             if (context.Resource is AuthorizationFilterContext authorizationFilterContext)
             {
-                var apiKey = authorizationFilterContext.HttpContext.Request.Headers[API_KEY_HEADER_NAME].FirstOrDefault();
+                string apiKey = authorizationFilterContext.HttpContext.Request.Headers[API_KEY_HEADER_NAME].FirstOrDefault();
                 if (apiKey != null && requirement.ApiKeys.Any(requiredApiKey => apiKey == requiredApiKey))
                 {
                     context.Succeed(requirement);

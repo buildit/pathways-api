@@ -404,3 +404,5 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 codealike.json
+appsettings.Production.json
+pathwaysid_rsa
