@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using pathways_api.Data.Mappers;
-using pathways_api.Services.Interfaces;
-
 namespace pathways_api.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Data.Mappers;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Interfaces;
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserDataController : ControllerBase //PathwaysController
@@ -16,15 +16,15 @@ namespace pathways_api.Controllers
         public UserDataController(IUserDataService userDataService) //DomoClient domoClient, 
         {
             //_domoClient = domoClient;
-            _userDataService = userDataService;
+            this._userDataService = userDataService;
         }
 
         // GET api/UserData
         [HttpGet]
         public async Task<List<UserDataDto>> GetUserDataAsync()
         {
-            var accessToken = await _userDataService.GetAccessTokenAsync();
-            var userData = await _userDataService.GetUsersDataAsync(accessToken);
+            string accessToken = await this._userDataService.GetAccessTokenAsync();
+            List<UserDataDto> userData = await this._userDataService.GetUsersDataAsync(accessToken);
 
             return userData;
         }

@@ -39,15 +39,18 @@ namespace pathways_api
             services.AddScoped<IUserSkillService, UserSkillService>();
             services.AddScoped<IMSGraphService, MicrosoftGraphService>();
             services.Configure<DomoClient>(Configuration.GetSection("DomoClient"));
-            services.AddTransient<IAuthorizationHandler, ApiKeyRequirementHandler>();
+
+            IConfigurationSection domoProviderConfig = this.Configuration.GetSection("DomoProvider");
+            services.Configure<DomoProvider>(domoProviderConfig);
+
             services.AddAuthorization(authConfig =>
             {
                 authConfig.AddPolicy("ApiKeyPolicy",
-                    policyBuilder => policyBuilder
-                        .AddRequirements(new ApiKeyRequirement(new[] { "userSkillSecretDomo" })));
+                    policyBuilder =>
+                        policyBuilder.AddRequirements(new ApiKeyRequirement(new[] { domoProviderConfig["ApiKey"] })));
             });
 
-            // configure DI for application services
+            services.AddSingleton<IAuthorizationHandler, ApiKeyRequirementHandler>();
             services.AddScoped<IUserDataService, userDataService>();
             services.AddScoped<ISkillsService, SkillsService>();
             services.AddScoped<IUserService, UserService>();

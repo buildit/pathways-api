@@ -59,6 +59,10 @@ namespace pathways_api.Data
             modelBuilder.Entity<User>()
                 .HasKey(e => e.Id);
 
+            modelBuilder.Entity<User>()
+                .Property(u => u.IsActive)
+                .HasDefaultValue(true);
+
             modelBuilder.Entity<RoleLevelRule>()
                 .HasKey(e => e.Id);
         }
