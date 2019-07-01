@@ -1,4 +1,4 @@
-namespace pathways_api.Data.Entities
+namespace pathways_api.Handlers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -10,7 +10,7 @@ namespace pathways_api.Data.Entities
 
         public ApiKeyRequirement(IEnumerable<string> apiKeys)
         {
-            ApiKeys = apiKeys?.ToList() ?? new List<string>();
+            this.ApiKeys = apiKeys?.ToList() ?? new List<string>();
         }
     }
 }

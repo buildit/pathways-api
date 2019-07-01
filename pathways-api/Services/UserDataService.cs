@@ -13,7 +13,7 @@ using pathways_api.Data;
 namespace pathways_api.Services
 {
     public class userDataService : IUserDataService
-    {            
+    {
         public async Task<string> GetAccessTokenAsync()
         {
             var domoClient = new HttpClient();
@@ -23,12 +23,13 @@ namespace pathways_api.Services
                 RequestUri = new Uri("https://api.domo.com/oauth/token?grant_type=client_credentials&scope=data"),
                 Method = HttpMethod.Get,
             };
+
             //TODO: move Both auth IDs to app config
             var AuthorizationString = "b8ac9139-d8f6-4bff-b7c8-34167d242ee6" + ":" +
                                       "73f47d8f10cfb960aa3ac3b2c6647ceeccf2788c6b13259de018e74dd6abe617";
-            
+
             var encodedAuthorizationString = Base64Encode(AuthorizationString);
-            
+
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Authorization", "Basic " + encodedAuthorizationString);
 
@@ -57,13 +58,13 @@ namespace pathways_api.Services
 
             dataSetRequest.Headers.Add("Accept", "application/json");
             dataSetRequest.Headers.Add("Authorization", "bearer " + accessToken);
-            
+
             var dataSetResponse = await dataSetClient.SendAsync(dataSetRequest).ConfigureAwait(false);
 
             dataSetResponse.EnsureSuccessStatusCode();
             var dataSetJson = await dataSetResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             var dataSetArray = JArray.Parse(dataSetJson);
-            
+
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.NullValueHandling = NullValueHandling.Ignore;
             settings.MissingMemberHandling = MissingMemberHandling.Ignore;
@@ -71,9 +72,9 @@ namespace pathways_api.Services
 
             return dataSets;
         }
-        
+
         public async Task<List<UserDataDto>> GetUsersDataHeadersAsync(string accessToken)
-        {            
+        {
             var userDataClient = new HttpClient();
             var dataSetRequest = new HttpRequestMessage()
             {
@@ -84,7 +85,7 @@ namespace pathways_api.Services
 
             dataSetRequest.Headers.Add("Accept", "application/json");
             dataSetRequest.Headers.Add("Authorization", "bearer " + accessToken);
-            
+
             var dataSetResponse = await userDataClient.SendAsync(dataSetRequest).ConfigureAwait(false);
 
             dataSetResponse.EnsureSuccessStatusCode();
@@ -94,7 +95,7 @@ namespace pathways_api.Services
 
             return new List<UserDataDto>();
         }
-        
+
         public async Task<List<UserDataDto>> GetUsersDataAsync(string accessToken)
         {
             var userDataClient = new HttpClient();
@@ -105,19 +106,19 @@ namespace pathways_api.Services
             {
                 sql = "SELECT * FROM table",
             };
-            
+
             var userDatarequestJson = JsonConvert.SerializeObject(userDataRequest);
-            
+
             //TODO: move URL to app config
             var url = "https://api.domo.com/v1/datasets/query/execute/8b209fa4-bb92-4b39-8e73-3f4183542129";
-            
+
             var userDataResponse = userDataClient.PostAsync(url, new StringContent(userDatarequestJson, Encoding.UTF8, "application/json")).Result;
             userDataResponse.EnsureSuccessStatusCode();
             var dataSetJsonString = await userDataResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-           var usersData = ConvertUsersJsonToDto(dataSetJsonString);
+            var usersData = ConvertUsersJsonToDto(dataSetJsonString);
 
-           return usersData;
+            return usersData;
         }
 
         public List<UserDataDto> ConvertUsersJsonToDto(string usersDataJsonString)
@@ -202,7 +203,6 @@ namespace pathways_api.Services
 
             return userDataList;
         }
-
 
         private string Base64Encode(string plainText)
         {

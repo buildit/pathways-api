@@ -1,6 +1,7 @@
 namespace pathways_api.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Data;
     using Data.Entities;
@@ -11,7 +12,8 @@ namespace pathways_api.Services
 
     public class UserService : PathwaysDataQueryService<User>, IUserService
     {
-        public UserService(DataContext context) : base(context, context.Users)
+        public UserService(DataContext context) 
+            : base(context, context.Users)
         {
         }
 
@@ -83,6 +85,15 @@ namespace pathways_api.Services
         public User GetByIdWithIncludes(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<User> GetUsersSkills()
+        {
+            List<User> activeUsers = this.context.Users.Where(x => x.IsActive)
+                .Include(u => u.UserSkills).ThenInclude(u => u.SkillLevel)
+                .Include(u => u.UserSkills).ThenInclude(u => u.SkillType)
+                .ToList(); //get all active users
+            return activeUsers;
         }
     }
 }

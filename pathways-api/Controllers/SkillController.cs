@@ -9,21 +9,21 @@ namespace pathways_api.Controllers
     using pathways_common.Controllers;
     using Services.Interfaces;
 
-    public class SkillController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SkillController : ControllerBase
     {
         private readonly ISkillLevelService levelService;
         private readonly IMapper mapper;
         private readonly ISkillTypeLevelService typeLevelService;
         private readonly ISkillTypeService typeService;
-        private readonly ISkillsService skillsService;
 
-        public SkillController(ISkillLevelService levelService, ISkillTypeService typeService, ISkillTypeLevelService typeLevelService, IMapper mapper, ISkillsService skillsService)
+        public SkillController(ISkillLevelService levelService, ISkillTypeService typeService, ISkillTypeLevelService typeLevelService, IMapper mapper)
         {
             this.levelService = levelService;
             this.typeService = typeService;
             this.typeLevelService = typeLevelService;
             this.mapper = mapper;
-            this.skillsService = skillsService;
         }
 
         [HttpGet("types")]
@@ -64,15 +64,6 @@ namespace pathways_api.Controllers
             IList<SkillTypeLevel> entityCollection = this.mapper.Map<IList<SkillTypeLevel>>(collection);
             this.typeLevelService.UpdateRange(entityCollection);
             return this.Ok(entityCollection.Count);
-        }
-
-        [HttpGet("usersSkills")]
-        [Authorize(Policy = "ApiKeyPolicy")]
-        //Domo get skills
-        public IActionResult GetUsersSkills()
-        {
-            var userDtos = this.skillsService.GetUsersSkills();
-            return this.Ok(userDtos);
         }
     }
 }
