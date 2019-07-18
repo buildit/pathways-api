@@ -4,5 +4,6 @@ namespace pathways_api.Services.Interfaces
 
     public interface IUserSkillService : IRangedCrudService<UserSkill>
     {
+        UserSkill Retrieve(int userSkillUserId, int userSkillSkillTypeId);
     }
 }

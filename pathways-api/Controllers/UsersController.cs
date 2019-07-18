@@ -72,6 +72,7 @@ namespace pathways_api.Controllers
             User newUser = this.mapper.Map<User>(user);
 
             dbUser.DirectoryName = newUser.DirectoryName;
+            dbUser.OrganizationId = newUser.OrganizationId;
             dbUser.Name = newUser.Name;
 
             this.userService.Update(dbUser);

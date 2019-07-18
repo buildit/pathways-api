@@ -1,9 +1,11 @@
 namespace pathways_api.Services
 {
     using System;
+    using System.Linq;
     using Data;
     using Data.Entities;
     using Interfaces;
+    using Microsoft.EntityFrameworkCore.Internal;
 
     public class UserSkillService : PathwaysDataQueryService<UserSkill>, IUserSkillService
     {
@@ -29,6 +31,11 @@ namespace pathways_api.Services
         public UserSkill GetByIdWithIncludes(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public UserSkill Retrieve(int userSkillUserId, int userSkillSkillTypeId)
+        {
+            return this.collection.FirstOrDefault(s => s.UserId == userSkillUserId && s.SkillTypeId == userSkillSkillTypeId);
         }
 
         protected override void MapUpdateFields(UserSkill targetObject, UserSkill sourceObject)
