@@ -6,15 +6,18 @@ namespace pathways_api.Controllers
     using Data.Entities;
     using Data.Mappers;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using pathways_common.Authentication.Extensions;
     using pathways_common.Controllers;
     using Services.Interfaces;
 
-    public class UserSkillController : ApiController
+    public class UserSkillController : CacheResolvingController<User>
     {
         private readonly IMapper mapper;
         private readonly IUserSkillService service;
 
-        public UserSkillController(IUserSkillService service, IMapper mapper)
+        public UserSkillController(IUserSkillService service, IMapper mapper, IUserService userService, IMemoryCache memoryCache)
+            : base(userService, memoryCache)
         {
             this.service = service;
             this.mapper = mapper;
@@ -39,7 +42,18 @@ namespace pathways_api.Controllers
         [HttpPost]
         public IActionResult UpdateOrCreate([FromBody] UserSkillDto userSkill)
         {
+            string authenticatedEmail = this.User.Claims.GetEmail();
+            int userId = this.GetUserId(authenticatedEmail);
+            userSkill.UserId = userId;
             UserSkill skillEntity = this.mapper.Map<UserSkill>(userSkill);
+            UserSkill existingSkill = this.service.Retrieve(userSkill.UserId, userSkill.SkillTypeId);
+
+            if (existingSkill != null)
+            {
+                existingSkill.SkillLevelId = userSkill.SkillLevelId;
+                skillEntity = existingSkill;
+            }
+
             this.service.Update(skillEntity);
             return this.Ok(skillEntity);
         }

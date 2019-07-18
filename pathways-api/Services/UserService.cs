@@ -12,7 +12,7 @@ namespace pathways_api.Services
 
     public class UserService : PathwaysDataQueryService<User>, IUserService
     {
-        public UserService(DataContext context) 
+        public UserService(DataContext context)
             : base(context, context.Users)
         {
         }
@@ -53,7 +53,7 @@ namespace pathways_api.Services
         {
             return this.context.Users
                 .Include(u => u.UserSkills)
-                .FirstOrDefault(u => u.Username == name);
+                .FirstOrDefault(u => u.Username == name || u.OrganizationId == name);
         }
 
         public void SetLogonTime(User user)
